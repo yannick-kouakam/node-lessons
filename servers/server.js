@@ -6,10 +6,12 @@ var express = require('express');
 var bodyparser = require('body-parser');
 var http = require('http');
 
+const  port  =process.env.PORT||3000;
+
 var app = new express();
 
 app.use(bodyparser.json())
-app.post('/user/add',(req,res)=>{
+app.post('/user/new',(req,res)=>{
 //console.log(req.body);
    var newUser = new User({
      username:req.body.username,
@@ -29,8 +31,16 @@ app.get('/user',(req,res)=>{
     },(err)=>{
       res.status(400).send(err);
     });
-})
-
-app.listen(3000,()=>{
-  console.log('runnig on port 3000');
 });
+
+app.post('/todo/new',(req,res)=>{
+
+});
+
+
+app.listen(port,()=>{
+  console.log(`runnig on port ${port}`);
+});
+
+
+module.exports = {app};
