@@ -8,18 +8,19 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,db)=>{
      console.log('Connection to Mongo Db successful');
    }
 
-   db.collection('Todos').insertOne({
-    txt:"second insertion",
-    completed:true
-   },(err,res)=>{
-     if(err){
-       console.log('insertion failed ',err);
-       return;
-     }
-
-     console.log(JSON.stringify(res.ops,undefined,2));
-
-   });
+//    db.collection('Todos').insertOne({
+//     txt:"third Todo insertion",
+//     completed:true
+//   },
+// (err,res)=>{
+//      if(err){
+//        console.log('insertion failed ',err);
+//        return;
+//      }
+//
+//      console.log(JSON.stringify(res.ops,undefined,2));
+//
+//    });
 
   //  db.collection('Users').insertOne({
   //    name:'Yannick',
@@ -31,5 +32,12 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp',(err,db)=>{
   //    }
   //    console.log(JSON.stringify(res.ops,undefined,2));
   //  })
-   db.close();
+
+  db.collection('Todos').findOneAndDelete({txt:'fith to insertion'})
+  .then((res)=>{
+    console.log(res);
+  },(err)=>{
+    console.log('delection failed');
+  })
+  // db.close();
 });
